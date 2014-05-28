@@ -1,0 +1,19 @@
+#Block
+
+tile.Conveyor.name=Conveyor
+
+#Items
+
+CraftingComponents0.name=Gear
+CraftingComponents1.name=Roller
+CraftingComponents2.name=Roller Strip
+CraftingComponents3.name=Conveyor Belt
+CraftingComponents4.name=Wrench Head
+CraftingComponents5.name=Core
+CraftingComponents6.name=Wrench Handel
+
+Modules0.name=Speed Module
+Modules1.name=Center Module
+Modules2.name=Cool Module
+Modules3.name=Very Cool Module
+Modules4.name=Supp Awesome Module
