@@ -27,10 +27,10 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 
 public class ConveyorRenderer extends TileEntitySpecialRenderer {
 
-    private int ID;
+   
 
     public ConveyorRenderer () {
-        ID = RenderingRegistry.getNextAvailableRenderId();
+       
     }
 
         public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float idk) {
@@ -45,17 +45,6 @@ public class ConveyorRenderer extends TileEntitySpecialRenderer {
     
       
         public void renderConveyor(ConveyorTile tl, World world, int x, int y, int z, Block block) {
-            Tessellator tessellator = Tessellator.instance;
-           
-            float f = block.getAmbientOcclusionLightValue();
-            int l = world.getLightBrightnessForSkyBlocks(x, y, z, 0);
-            int l1 = l % 65536;
-            int l2 = l / 65536;
-            tessellator.setColorOpaque_F(f, f, f);
-            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float)l1, (float)l2);
-
-        
-
             int dir = world.getBlockMetadata(x, y, z);
       
             GL11.glPushMatrix();
@@ -64,36 +53,40 @@ public class ConveyorRenderer extends TileEntitySpecialRenderer {
             GL11.glRotatef(dir * (-90F), 0F, 1F, 0F);
             if(world.getTileEntity(x, y +1, z + 1)instanceof ConveyorTile){
                 
-        		
-        	
+            	GL11.glRotatef(-224F, 0F, 0F, 1F);
+            	GL11.glTranslatef(0.6F, 0F, 0F);
+            	GL11.glRotatef(-180F, 1F, 0F,0F);
+            	GL11.glTranslatef(0F, -0.8F, 0F);
+        	    GL11.glScalef(1.5F, 1F, 1F);
             }
-            if (world.getTileEntity(x, y, z+1) instanceof ConveyorTile && world.getTileEntity(x+1, y, z) instanceof ConveyorTile){
+            if (world.getTileEntity(x, y, z+1) instanceof ConveyorTile && world.getTileEntity(x+1, y, z) instanceof ConveyorTile || world.getTileEntity(x, y, z-1) instanceof ConveyorTile && world.getTileEntity(x-1, y, z) instanceof ConveyorTile || world.getTileEntity(x, y, z+1) instanceof ConveyorTile && world.getTileEntity(x-1, y, z) instanceof ConveyorTile || world.getTileEntity(x, y, z-1) instanceof ConveyorTile && world.getTileEntity(x+1, y, z) instanceof ConveyorTile){
             	GL11.glRotatef(-90F, 0F, 1F, 0F);
          
             }
-            
+            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(TextureHandler.texturePath + ":textures/blocks/ConveyorModelUiversal.png"));
             if(world.getTileEntity(x, y - 1, z) instanceof TileEntityHopper){
            	CoveyorHollow ch = new CoveyorHollow();
-           	ch.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+           	ch.render(0.0625F);
             }else{
             if(world.getTileEntity(x, y, z - 1) instanceof IInventory ||world.getTileEntity(x, y, z + 1) instanceof IInventory || world.getTileEntity(x + 1, y, z ) instanceof IInventory || world.getTileEntity(x - 1, y, z) instanceof IInventory){
             	CoveyorImportExport cie = new CoveyorImportExport();
-            	cie.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
-            }else if (world.getTileEntity(x, y, z+1) instanceof ConveyorTile && world.getTileEntity(x+1, y, z) instanceof ConveyorTile){
+            	cie.render(0.0625F);
+            }else if (world.getTileEntity(x, y, z+1) instanceof ConveyorTile && world.getTileEntity(x+1, y, z) instanceof ConveyorTile || world.getTileEntity(x, y, z-1) instanceof ConveyorTile && world.getTileEntity(x-1, y, z) instanceof ConveyorTile || world.getTileEntity(x, y, z+1) instanceof ConveyorTile && world.getTileEntity(x-1, y, z) instanceof ConveyorTile || world.getTileEntity(x, y, z-1) instanceof ConveyorTile && world.getTileEntity(x+1, y, z) instanceof ConveyorTile){
             	CoveyorTurn ct = new CoveyorTurn();
-            	ct.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+            	ct.render(0.0625F);
             	
             }
             else{
             	Coveyor c = new Coveyor();
-            	c.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+            	c.render(0.0625F);
             	
             }
             
             }
             
-            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(TextureHandler.texturePath + ":textures/blocks/ConveyorModelUiversal.png"));
+            
             GL11.glPopMatrix();
+           
         }
     
 }

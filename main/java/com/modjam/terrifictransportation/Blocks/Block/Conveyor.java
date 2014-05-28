@@ -3,6 +3,7 @@ package com.modjam.terrifictransportation.Blocks.Block;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -14,16 +15,22 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import com.modjam.terrifictransportation.Blocks.Technical.BlockInfo;
 import com.modjam.terrifictransportation.CreativeTabs.TTCreativeTabs;
 import com.modjam.terrifictransportation.Items.Item.Modules;
 import com.modjam.terrifictransportation.Items.Item.Wrench;
+import com.modjam.terrifictransportation.Texture.TextureHandler;
 import com.modjam.terrifictransportation.tileentitys.ConveyorTile;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 
 public class Conveyor extends BlockContainer {
@@ -87,7 +94,7 @@ entitySpeed = entitySpeed * howmanyspeed;
             		entity.addVelocity(+entitySpeed, 0, 0);
             	}
                 
-                entity.stepHeight = 1F;
+            
             }
         }
         if(entity instanceof EntityItem){
@@ -317,6 +324,32 @@ public AxisAlignedBB getCollisionBoundingBoxFromPool(World p_149668_1_, int p_14
 	        }
 	}
 
+	 @SideOnly(Side.CLIENT)
+	    private IIcon TextureTop;
 
+	    @SideOnly(Side.CLIENT)
+	    private IIcon TextureSideX;
+	    private IIcon TextureSideZ;
+	    @Override
+	    @SideOnly(Side.CLIENT)
+	    public IIcon getIcon(int side , int meta) {
+	        if(side == 1) {
+	           return TextureTop;
+	        }
+	        if (side == 4) {
+	            return TextureSideX;
+	        }
+	        if (side == 5) {
+	            return TextureSideX;
+	        }
+	        return TextureSideZ;
+	    }
+	    @Override
+	    @SideOnly(Side.CLIENT)
+	    public void registerBlockIcons(IIconRegister register) {
+	        TextureSideX = register.registerIcon(TextureHandler.texturePath + ":" + BlockInfo.ConveyorTextureSidesX);
+	        TextureSideZ = register.registerIcon(TextureHandler.texturePath + ":" + BlockInfo.ConveyorTextureSidesZ);
+	        TextureTop = register.registerIcon(TextureHandler.texturePath + ":" + BlockInfo.ConveyorTextureTop);
+	    }
 
 }
