@@ -10,10 +10,10 @@ CraftingComponents2.name=Roller Strip
 CraftingComponents3.name=Conveyor Belt
 CraftingComponents4.name=Wrench Head
 CraftingComponents5.name=Core
-CraftingComponents6.name=Wrench Handel
+CraftingComponents6.name=Wrench Handle
 
 Modules0.name=Speed Module
 Modules1.name=Center Module
 Modules2.name=Cool Module
 Modules3.name=Very Cool Module
-Modules4.name=Supp Awesome Module
+Modules4.name=Super Awesome Module
